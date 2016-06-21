@@ -1,33 +1,30 @@
-from kafka import SimpleProducer, KafkaClient
+from kafka.producer import KafkaProducer
 import avro.schema
 import io, random
 from avro.io import DatumWriter
 import json
-
+import time
+import sys
 
 file = open("MOCK_DATA.json")
 str = file.read()
 message_list = json.loads(str)
-# To send messages synchronously
-kafka = KafkaClient('localhost:9092')
-producer = SimpleProducer(kafka)
  
 # Kafka topic
-topic = "Topic-Narrow"
+topic = "Raw-JSON"
  
-# Path to user.avsc avro schema
-schema_path="user.avsc"
-schema = avro.schema.parse(open(schema_path).read())
- 
- 
-while True:
+class Producer():
+    def __init__(self):
+        self.producer = KafkaProducer(bootstrap_servers=["52.41.44.90:9092","52.36.206.57:9092","52.40.205.225:9092"],acks=0,linger_ms=500)
+    def produce_msgs(self,msg_list):
+	while True:
+		index = random.randrange(0,999)
+    		json_msg =json.dumps(msg_list[index]).encode('utf-8')
+    		self.producer.send(topic, json_msg)
 
-    index = random.randrange(0,999)
-    json_msg = message_list[index]
-    print(json_msg)
-    writer = avro.io.DatumWriter(schema)
-    bytes_writer = io.BytesIO()
-    encoder = avro.io.BinaryEncoder(bytes_writer)
-    writer.write(json_msg, encoder)
-    raw_bytes = bytes_writer.getvalue()
-    producer.send_messages(topic, raw_bytes)
+if __name__ == "__main__":
+    args = sys.argv
+    prod = Producer()
+    prod.produce_msgs(message_list)
+
+ 
