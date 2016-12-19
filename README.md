@@ -1,7 +1,9 @@
 # Serial-War
 
 A benchmark project of Avro, JSON, Protocol Buffer created at Insight.
+
 Slides can be checked at http://www.slideshare.net/XuechaoWu/xuechao-serial-war-63753460
+
 The dashboard currently has no data feed. Leave an issue for a live demo.
 
 + Metrics
