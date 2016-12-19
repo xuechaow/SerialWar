@@ -1,9 +1,10 @@
+# Test producer
 from kafka import KafkaConsumer
 import avro.schema
 import avro.io
 import io
  
-# To consume messages
+# To consume messages on kafka to test schema
 consumer = KafkaConsumer('Topic-Narrow',
                          group_id='my_group',
                          bootstrap_servers=['localhost:9092'])

@@ -1,0 +1,18 @@
+message User {
+
+     required int32 id = 1;
+     required string first_name = 2;
+     required string last_name = 3;
+     required string email = 4;
+     required string gender = 5;
+     required string City = 6;
+     required string Company = 7;
+     required string Country = 8;
+     required string Job = 9;
+     required string SSN = 10;
+
+}
+
+message PersonInfo {
+  repeated User user = 1;
+}

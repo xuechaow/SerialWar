@@ -27,7 +27,7 @@ if __name__ == "__main__":
 	ssc = StreamingContext(sc, stream_rate)
 
 	zkQuorum = 'ec2-52-40-205-225.us-west-2.compute.amazonaws.com:2181'
-	kvs = KafkaUtils.createStream(ssc, zkQuorum, "JSON-Consumer", {topic: 1})
+	kvs = KafkaUtils.createStream(ssc, zkQuorum, "json", {topic: 1})
 	message_DStream = kvs.map(lambda x:x[1])
 	#message_DStream.pprint()
 	
